@@ -20,7 +20,6 @@ class ViewController: UIViewController {
         encrypt(string: "This is my message.")
     }
     
-    
     /// This function will encrypt the message with RSA encryption.
     ///
     /// - Parameter string: String that needs to be encrypted.
@@ -46,7 +45,6 @@ class ViewController: UIViewController {
         }
     }
     
-    
     /// Generates the random public and private RSA keys and assigns it to the specified property.
     ///
     /// publicKey will hold the RSA Public key.
@@ -62,7 +60,6 @@ class ViewController: UIViewController {
         // This function will create random public, private keys based on the parameters send to it.
         SecKeyGeneratePair(parameters as CFDictionary, &publicKey, &privateKey)
     }
-    
     
     /// This function converts the unsigned integer to Data.
     ///
