@@ -12,6 +12,12 @@
 		8FDC442A20AEB5AC0071C98F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FDC442820AEB5AC0071C98F /* Main.storyboard */; };
 		8FDC442C20AEB5AE0071C98F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FDC442B20AEB5AE0071C98F /* Assets.xcassets */; };
 		8FDC442F20AEB5AE0071C98F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FDC442D20AEB5AE0071C98F /* LaunchScreen.storyboard */; };
+		8FDC443B20AEDD790071C98F /* RSAUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC443A20AEDD790071C98F /* RSAUtils.swift */; };
+		8FDC443D20AEE5140071C98F /* RSAEncryptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC443C20AEE5140071C98F /* RSAEncryptionViewController.swift */; };
+		8FDC444320AEE6E10071C98F /* CONFIG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC444220AEE6E10071C98F /* CONFIG.swift */; };
+		8FDC444A20AEFA400071C98F /* public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = 8FDC444820AEFA400071C98F /* public_key.pem */; };
+		8FDC444B20AEFA400071C98F /* private_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = 8FDC444920AEFA400071C98F /* private_key.pem */; };
+		8FDC444D20AFE3A90071C98F /* private_key_pkcs8.pem in Resources */ = {isa = PBXBuildFile; fileRef = 8FDC444C20AFE3A90071C98F /* private_key_pkcs8.pem */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +28,12 @@
 		8FDC442B20AEB5AE0071C98F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8FDC442E20AEB5AE0071C98F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8FDC443020AEB5AE0071C98F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8FDC443A20AEDD790071C98F /* RSAUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSAUtils.swift; sourceTree = "<group>"; };
+		8FDC443C20AEE5140071C98F /* RSAEncryptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSAEncryptionViewController.swift; sourceTree = "<group>"; };
+		8FDC444220AEE6E10071C98F /* CONFIG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CONFIG.swift; sourceTree = "<group>"; };
+		8FDC444820AEFA400071C98F /* public_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = public_key.pem; sourceTree = "<group>"; };
+		8FDC444920AEFA400071C98F /* private_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = private_key.pem; sourceTree = "<group>"; };
+		8FDC444C20AFE3A90071C98F /* private_key_pkcs8.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = private_key_pkcs8.pem; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,12 +68,26 @@
 			children = (
 				8FDC442420AEB5AC0071C98F /* AppDelegate.swift */,
 				8FDC442620AEB5AC0071C98F /* ViewController.swift */,
+				8FDC444E20AFE3B00071C98F /* Keys */,
+				8FDC444220AEE6E10071C98F /* CONFIG.swift */,
+				8FDC443C20AEE5140071C98F /* RSAEncryptionViewController.swift */,
+				8FDC443A20AEDD790071C98F /* RSAUtils.swift */,
 				8FDC442820AEB5AC0071C98F /* Main.storyboard */,
 				8FDC442B20AEB5AE0071C98F /* Assets.xcassets */,
 				8FDC442D20AEB5AE0071C98F /* LaunchScreen.storyboard */,
 				8FDC443020AEB5AE0071C98F /* Info.plist */,
 			);
 			path = RSAEncryption;
+			sourceTree = "<group>";
+		};
+		8FDC444E20AFE3B00071C98F /* Keys */ = {
+			isa = PBXGroup;
+			children = (
+				8FDC444920AEFA400071C98F /* private_key.pem */,
+				8FDC444C20AFE3A90071C98F /* private_key_pkcs8.pem */,
+				8FDC444820AEFA400071C98F /* public_key.pem */,
+			);
+			name = Keys;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -122,7 +148,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FDC444B20AEFA400071C98F /* private_key.pem in Resources */,
 				8FDC442F20AEB5AE0071C98F /* LaunchScreen.storyboard in Resources */,
+				8FDC444D20AFE3A90071C98F /* private_key_pkcs8.pem in Resources */,
+				8FDC444A20AEFA400071C98F /* public_key.pem in Resources */,
 				8FDC442C20AEB5AE0071C98F /* Assets.xcassets in Resources */,
 				8FDC442A20AEB5AC0071C98F /* Main.storyboard in Resources */,
 			);
@@ -135,7 +164,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FDC443D20AEE5140071C98F /* RSAEncryptionViewController.swift in Sources */,
+				8FDC444320AEE6E10071C98F /* CONFIG.swift in Sources */,
 				8FDC442720AEB5AC0071C98F /* ViewController.swift in Sources */,
+				8FDC443B20AEDD790071C98F /* RSAUtils.swift in Sources */,
 				8FDC442520AEB5AC0071C98F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
