@@ -23,11 +23,15 @@ class RSAEncryptionViewController: UIViewController {
         
         if let encryptedString = encrypt(message: "Anirudha", publicKey: "public_key") {
             print(encryptedString)
+            if let decryptedString = decrypt(message: encryptedString, privateKey: "private_key_pkcs8") {
+                print(decryptedString)
+            } else {
+                print("Failed to decrypt.")
+            }
         } else {
             print("Failed to encrypt.")
         }
     }
-    
     
     /// Does the RSA encryption of the message passed with the public key.
     ///
@@ -49,13 +53,41 @@ class RSAEncryptionViewController: UIViewController {
         let base64Data = encryptedData.base64EncodedData(options: Data.Base64EncodingOptions.endLineWithLineFeed)
         
         guard let base64String = String(data: base64Data, encoding: String.Encoding.utf8) else {
-            print("base64String Unexpectedly found nil")
+            print("base64String Unexpectedly found nil while encoding")
             return nil
         }
         
         return base64String
     }
     
+    /// Does the RSA decryption of the message passed with the public key.
+    ///
+    /// - Parameters:
+    ///   - message: String to be encrypted.
+    ///   - privateKey: Name of the private key without extension.
+    /// - Returns: The decrypted string.
+    func decrypt(message: String, privateKey: String) -> String? {
+        guard let PRIVATE_KEY = getKeyStringFromPEM(name: privateKey) else {
+            return nil
+        }
+        
+        guard let base64Data = Data(base64Encoded: message, options: Data.Base64DecodingOptions.ignoreUnknownCharacters) else {
+            print("base64Data Unexpectedly found nil while decoding.")
+            return nil
+        }
+        
+        guard let decryptedData = RSAUtils.decryptWithRSAPrivateKey(base64Data, privkeyBase64: PRIVATE_KEY, keychainTag: TAG_PUBLIC_KEY) else {
+            print("decryptedData Unexpectedly found nil.")
+            return nil
+        }
+        
+        guard let decryptedString = String(data: decryptedData, encoding: String.Encoding.utf8) else {
+            print("decryptedString Unexpectedly found nil while decrypting.")
+            return nil
+        }
+        
+        return decryptedString
+    }
     
     /// Finds the pem file in the bundle.
     ///
