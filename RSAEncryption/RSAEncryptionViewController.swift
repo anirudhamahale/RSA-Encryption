@@ -28,11 +28,20 @@ class RSAEncryptionViewController: UIViewController {
         }
     }
     
+    
+    /// Does the RSA encryption of the message passed with the public key.
+    ///
+    /// - Parameters:
+    ///   - message: String to be encrypted.
+    ///   - publicKey: Name of the public key without extension.
+    /// - Returns: The base64String of the encrypted string.
     func encrypt(message: String, publicKey: String) -> String? {
-        let PUBLIC_KEY = getKeyStringFromPEM(name: publicKey)
+        guard let PUBLIC_KEY = getKeyStringFromPEM(name: publicKey) else {
+            return nil
+        }
         
         let data = message.data(using: String.Encoding.utf8)!
-        guard let encryptedData = RSAUtils.encryptWithRSAPublicKey(data, pubkeyBase64: PUBLIC_KEY, keychainTag: "sdlkfjslkd") else {
+        guard let encryptedData = RSAUtils.encryptWithRSAPublicKey(data, pubkeyBase64: PUBLIC_KEY, keychainTag: TAG_PUBLIC_KEY) else {
             print("encryptedData Unexpectedly found nil")
             return nil
         }
@@ -47,20 +56,32 @@ class RSAEncryptionViewController: UIViewController {
         return base64String
     }
     
-    func getKeyStringFromPEM(name: String) -> String {
-        let bundle = Bundle.main
-        
-        let keyPath = bundle.path(forResource: name, ofType: "pem")!
-        let keyString = try! NSString(contentsOfFile: keyPath, encoding: String.Encoding.utf8.rawValue)
-        let keyArray = keyString.components(separatedBy: "\n") //Remove new line characters
-        
-        var keyOutput : String = ""
-        
-        for item in keyArray {
-            if !item.contains("-----") { //Example: -----BEGIN PUBLIC KEY-----
-                keyOutput += item //Join elements of the text array together as a single string
-            }
+    
+    /// Finds the pem file in the bundle.
+    ///
+    /// - Parameter name: Name of the pem file without extension.
+    /// - Returns: The string of the pem file.
+    func getKeyStringFromPEM(name: String) -> String? {
+        guard let keyPath = Bundle.main.path(forResource: name, ofType: "pem") else {
+            print("\(name).pem not found in application bundle directory.")
+            return nil
         }
-        return keyOutput
+        
+        do {
+            let keyString = try String(contentsOfFile: keyPath, encoding: String.Encoding.utf8)
+            let keyArray = keyString.components(separatedBy: "\n") //Remove new line characters
+            
+            var keyOutput : String = ""
+            
+            for item in keyArray {
+                if !item.contains("-----") { //Example: -----BEGIN PUBLIC KEY-----
+                    keyOutput += item //Join elements of the text array together as a single string
+                }
+            }
+            return keyOutput
+        } catch {
+            print("\(name).pem not found in application bundle directory.")
+            return nil
+        }
     }
 }
