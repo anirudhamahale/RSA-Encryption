@@ -24,7 +24,6 @@ openssl pkcs8 -topk8 -inform PEM -in private_key.pem -outform PEM -out private_k
 
 #### Add the 2 files public_key.pem & private_key_pkcs8.pem(optional) if you will decrypt message app side to the Xcode bundle.
 #### Have a look at class RSAEncryptionViewController the way it's implemented.
-#### .
 
 Thanks to
 -------------
